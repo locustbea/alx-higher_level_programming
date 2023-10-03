@@ -1,47 +1,48 @@
 #include "lists.h"
 
 /**
- * insert_node - Fucn inserts node into sorted linked list
- * @head: list start pointer
- * @number: number to add
- * Return: Sorted linked list
+ * insert_node - short description
+ *
+ * Description: long description
+ *
+ * @head: argument_1 description
+ * @number: argument_2 description
+ *
+ * Return: return description
  */
 listint_t *insert_node(listint_t **head, int number)
 {
-	listint_t *new, *aux;
-	int flag = 0;
+	listint_t *new, *current, *previous;
+	int count;
 
+	count = 0;
+	current = previous = *head;
 	new = malloc(sizeof(listint_t));
-	if (!new)
-	{
+	if (new == NULL)
 		return (NULL);
-	}
 	new->n = number;
-	aux = *head;
-	if (!*head || !head)
+	new->next = *head;
+	if (*head == NULL)
 	{
-		new->next = NULL;
-		(*head) = new;
-		return (*head);
+		*head = new;
+		return (new);
 	}
-	while (aux->next != NULL)
+	while (current != NULL)
 	{
-		if (number < (*head)->n)
+		count++;
+		if (current->n >= number)
 		{
-			flag = 1;
-			break;
+			if (count == 1)
+				*head = new;
+			else
+				previous->next = new;
+			new->next = current;
+			return (new);
 		}
-		else if (number < aux->next->n)
-			break;
-		aux = aux->next;
+		previous = current;
+		current = current->next;
 	}
-	new->next = aux->next;
-	if (flag == 1)
-	{
-		(*head) = new;
-		new->next = aux;
-	}
-	else
-		aux->next = new;
-	return (*head);
+	previous->next = new;
+	new->next = NULL;
+	return (new);
 }
