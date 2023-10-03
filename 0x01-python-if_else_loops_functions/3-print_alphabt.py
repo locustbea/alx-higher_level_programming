@@ -1,4 +1,4 @@
 #!/usr/bin/python3
-for i in range(97, 123):
-    if chr(i) is not 'q' and chr(i) is not 'e':
-        print("{}.format(chr(i)), end="")
+for char_number in range(97, 123):
+    if char_number != 101 and char_number != 113:
+        print("{character}".format(character=chr(char_number)), end="")
