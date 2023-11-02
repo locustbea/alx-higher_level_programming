@@ -1,27 +1,21 @@
 #!/usr/bin/python3
-"""Module for add_intger method."""
+"""add ingeger module"""
 
 
 def add_integer(a, b=98):
-    """Adds two integers.
-
-    Args:
-        a: first integer.
-        b: second integer, default 98.
-
-    Raises:
-        TypeError: if a, b are not int, float.
-
-    Returns:
-        The sum of the two integers.
+    """Returns an integer: the addition of int(a) and int(b)
+    Arges:
+        a: int or float
+        b: int or float
     """
-
-    if type(a) not in (int, float):
-        raise TypeError('a must be an integer')
-    if type(b) not in (int, float):
-        raise TypeError('b must be an integer')
+    if a is None or not isinstance(a, (int, float)):
+        raise TypeError("a must be an integer")
+    if b is None or not isinstance(b, (int, float)):
+        raise TypeError("b must be an integer")
+    max_value = (2 ** 31) - 1
+    min_value = -max_value - 1
+    if a > max_value or b > max_value or a < min_value or b < min_value:
+        raise OverflowError(
+            "Float overflow: int too large to convert to float")
+    # cast to int then add
     return int(a) + int(b)
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testfile("tests/0-add_integer.txt")
