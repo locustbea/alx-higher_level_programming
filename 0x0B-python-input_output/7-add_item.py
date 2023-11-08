@@ -1,17 +1,18 @@
 #!/usr/bin/python3
-"""save args to file"""
+""" Adds items to a json file """
+import sys
 
-from sys import argv
 
-# load functions
-load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
 save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
-FILENAME = "add_item.json"
+load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
+filename = "add_item.json"
+obj = [arg for arg in sys.argv if arg != sys.argv[0]]
 
 try:
-    json_obj = load_from_json_file(FILENAME)
-    json_obj += argv[1:]
-    save_to_json_file(json_obj, FILENAME)
-
-except FileNotFoundError:
-    save_to_json_file(argv[1:], FILENAME)
+    data = load_from_json_file(filename)
+except Exception:
+    save_to_json_file(obj, filename)
+else:
+    for o in obj:
+        data.append(o)
+    save_to_json_file(data, filename)
