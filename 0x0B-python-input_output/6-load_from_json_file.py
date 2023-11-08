@@ -1,14 +1,10 @@
 #!/usr/bin/python3
-"""load from json file"""
-
-from json import load
+""" Load from json file module """
+import json
 
 
 def load_from_json_file(filename):
-    """load_from_json_file
-    load json object from .json file
-    arges:
-        filename: string file name
-    """
-    with open(filename, encoding="utf-8", mode="r") as file:
-        return load(file)
+    """ Loads data from a json file """
+    with open(filename, "r") as file:
+        data = json.load(file)
+    return data
